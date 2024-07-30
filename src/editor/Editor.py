@@ -96,3 +96,36 @@ class ImageEditor:
 
         # Draw the title text on the image
         cv2.putText(img, title, (text_x, text_y), font, font_scale, text_color, thickness)
+
+    def draw_line(self,img, x1, y1, x2, y2, id,line_clr=[0,0,0], corner_clr=[255,255,255],txt_clr=[0,0,0],corner_size=30):
+        w = corner_size
+        h = corner_size
+        x1 = int(x1.item())
+        y1 = int(y1.item())
+        x2 = int(x2.item())
+        y2 = int(y2.item())
+
+        # Draw bounding box
+        cv2.rectangle(img, (x1, y1), (x2, y2), line_clr, 1)
+
+        # Top left corner
+        cv2.line(img, (x1, y1), (x1 + w, y1), corner_clr, 2)
+        cv2.line(img, (x1, y1), (x1, y1 + h), corner_clr, 2)
+
+        # Top right corner
+        cv2.line(img, (x2, y1), (x2 - w, y1), corner_clr, 2)
+        cv2.line(img, (x2, y1), (x2, y1 + h), corner_clr, 2)
+
+        # Bottom right corner
+        cv2.line(img, (x2, y2), (x2 - w, y2), corner_clr, 2)
+        cv2.line(img, (x2, y2), (x2, y2 - h), corner_clr, 2)
+
+        # Bottom left corner
+        cv2.line(img, (x1, y2), (x1 + w, y2), corner_clr, 2)
+        cv2.line(img, (x1, y2), (x1, y2 - h), corner_clr, 2)
+
+        text = f'ID:{str(id)}'
+        cv2.putText(img, text,
+                    (x1, y1 - 2),
+                    0, 1 / 2, txt_clr,
+                    thickness=1, lineType=cv2.FILLED)
