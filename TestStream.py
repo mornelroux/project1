@@ -12,12 +12,18 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'boxmot'))
 from yolov10.ultralytics import YOLOv10
 import cv2
 from src.editor.Editor import ImageEditor
+from src.editor.InOutCounter import InOutCounter
 from boxmot.trackers.bytetrack.byte_tracker import BYTETracker as ByteTracker
 
 #Load model with pretrained weights
 model = YOLOv10('models/pretrained/yolov10n.pt')
 editor = ImageEditor()
 tracker = ByteTracker()
+
+#Create Count Region
+line1 = ((300,0),(300,480))
+line2 = ((340,0),(340,480))
+counter = InOutCounter(line1,line2)
 
 #Load Camera
 cap = cv2.VideoCapture(0)
@@ -48,7 +54,13 @@ while True:
             x1,y1,x2,y2,id,conf,cls,det_ind = t
             # editor.fill_bounding_box(original_image, [0,255,0], x1, y1, x2, y2,0.8)
             # editor.draw_label(original_image, str(id), [0,255,0], x1, y1)
-            editor.draw_line(original_image, x1, y1, x2, y2, id)
+            #editor.draw_line(original_image, x1, y1, x2, y2, id)
+            #get midpoint of object
+            midpoint = (int(0.5*(x1 + x2)),int(0.5*(y1 + y2)))
+            count = counter.trackObject(original_image,midpoint,id)
+            editor.fill_bounding_box(original_image, [0,255,0], x1, y1, x2, y2,0.8)
+            editor.draw_label(original_image, f"Object {id} : Count {count}", [0,255,0], x1, y1)
+            editor.draw_corners(original_image, x1, y1, x2, y2)
 
     # Plain detection
     # for r in results:
