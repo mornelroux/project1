@@ -91,7 +91,7 @@ def CounttrackedObjects(img,tracked,line_start,line_stop):
         memory[id][0] = midpoint
 
         # Draw line connecting previous midpoint and current midpoint
-        cv2.line(img, previous_midpoints, midpoint, (255,255,255), 2)#cv2.line(img, (x1, y1), (x1 + w, y1), corner_clr, 2)
+        cv2.line(img, previous_midpoints, midpoint, (255,255,255), 2)
         
         if intersection((line_start,line_stop),(previous_midpoints,midpoint)):
             intersection_angle
