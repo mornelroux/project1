@@ -28,17 +28,16 @@ model = YOLOv10(MODEL_PATH)
 
 #Train the model
 model.train(
-            data= DATASET,         # Path to your dataset config file
-            batch = 8,               # Training batch size
-            imgsz= 640,                   # Input image size
-            epochs= 2,                  # Number of training epochs
-            optimizer= 'SGD',             # Optimizer, can be 'Adam', 'SGD', etc.
-            lr0= 0.01,                    # Initial learning rate
-            lrf= 0.1,                     # Final learning rate factor
-            weight_decay= 0.0005,         # Weight decay for regularization
-            momentum= 0.937,              # Momentum (SGD-specific)
+            data= DATASET,                  # Path to your dataset config file
+            batch = 8,                      # Training batch size
+            imgsz= 640,                     # Input image size
+            epochs= 2,                      # Number of training epochs
+            optimizer= 'SGD',               # Optimizer, can be 'Adam', 'SGD', etc.
+            lr0= 0.01,                      # Initial learning rate
+            lrf= 0.1,                       # Final learning rate factor
+            weight_decay= 0.0005,           # Weight decay for regularization
+            momentum= 0.937,                # Momentum (SGD-specific)
             verbose= True,                # Verbose output
-            device= '0',                  # GPU device index or 'cpu'
             workers= 8,                   # Number of workers for data loading
             project= OUTPUT_PATH,       # Output directory for results
             name= RUN_NAME,                  # Experiment name

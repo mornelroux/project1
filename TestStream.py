@@ -16,7 +16,7 @@ from src.editor.InOutCounter import InOutCounter
 from boxmot.trackers.bytetrack.byte_tracker import BYTETracker as ByteTracker
 
 #Load model with pretrained weights
-model = YOLOv10('models/pretrained/yolov10n.pt')
+model = YOLOv10('weights/pretrained/yolov10n.pt')
 editor = ImageEditor()
 tracker = ByteTracker()
 
@@ -26,7 +26,7 @@ line2 = ((340,0),(340,480))
 counter = InOutCounter(line1,line2)
 
 #Load Camera
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('videos/sheepWalking.mp4')
 
 while True:
     #Read frames

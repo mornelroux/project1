@@ -17,10 +17,11 @@ colors = np.random.uniform(0, 255, size=(100, 3))
 editor = ImageEditor()
 
 #Load model with pretrained weights
-model = YOLOv10('models/pretrained/yolov10n.pt')
+model = YOLOv10('weights/pretrained/yolov10n.pt')
+#model = YOLOv10('best.pt')
 
 #Detect objects
-results = model.predict('data/dogs.jpg')
+results = model.predict('Sheep_Download_train_1046_jpg.rf.e84fc35adaffca5c9e6a02298cab65e6.jpg')
 
 # def fill_bounding_box(img, color, x, y, x_plus_w, y_plus_h):
 #     """
@@ -121,7 +122,7 @@ for r in results:
             
             b = (box.xyxy[0])  # get box coordinates in (left, top, right, bottom) format
             c = box.cls
-            print(b)
+            print(c)
             editor.draw_bounding_box(original_image, [0,255,0], b[0], b[1], b[2], b[3])
             editor.draw_label(original_image, "dog", [0,255,0], b[0], b[1])
             #annotator.box_label(b, model.names[int(c)])
